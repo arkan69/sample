@@ -1,0 +1,45 @@
+
+Program Dijkstra
+
+
+int looping = 9
+int indeks = 0
+while(looping!=0)
+
+	Node n = nodeList.get(indeks)
+	visited[indeks] = true
+	int close = 0
+	
+	if(indeks == start) then
+		n.ds = 0
+	endif
+
+	for(int i=0; i< NODE_COUNT; i++) 
+		if(!visited[i] && graph[indeks][i] != -1 && n.ds == Integer.MAX_VALUE)
+			nodeList.get(i).ds=n.ds + graph [indeks][i]
+			nodeList.get(i).parent=indeks
+		else if(!visited[i] && graph[indeks][i] != -1 && n.ds != Integer.MAX_VALUE)
+			if((n.ds+graph[indeks][i]) < nodeList.get(i).ds)
+				nodeList.get(i).ds=n.ds + graph [indeks][i]
+				nodeList.get(i).parent=indeks
+			endif
+		endif
+	end for
+
+	Node a = new Node(1)
+	for(int i=0; i<NODE_COUNT; i++)
+		if(!visited[i])
+			if(a.ds == Integer.MAX_VALUE)
+				a = nodeList.get(i)
+			endif
+			
+			if(nodeList.get(i).compareTo(a) < 1)
+				a = nodeList.get(i)
+			endif
+		endif
+	end for
+
+	indeks = a.id
+	looping--
+
+end while
